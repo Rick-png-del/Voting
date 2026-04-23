@@ -97,6 +97,18 @@ button:disabled {
   font-weight: 750;
 }
 
+.candidate small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.candidate-gap {
+  border-color: #c9d5e4;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+}
+
 .chart-wrap {
   height: min(64vh, 620px);
   min-height: 420px;
@@ -122,6 +134,10 @@ button:disabled {
   stroke-width: 1;
 }
 
+.grid-hour {
+  stroke: #d8e0ea;
+}
+
 .series-line {
   fill: none;
   stroke-width: 3;
@@ -144,6 +160,10 @@ button:disabled {
   fill: var(--text);
 }
 
+.hour-point {
+  stroke: none;
+}
+
 @media (max-width: 640px) {
   .shell {
     width: min(100vw - 20px, 1180px);
@@ -158,4 +178,3 @@ button:disabled {
     min-height: 360px;
   }
 }
-

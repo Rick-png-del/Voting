@@ -66,7 +66,7 @@ p {
 
 .summary {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
   margin: 22px 0;
 }
@@ -90,6 +90,18 @@ p {
   display: block;
   font-size: 30px;
   font-weight: 750;
+}
+
+.candidate small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.candidate-gap {
+  border-color: #c9d5e4;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
 }
 
 .chart-wrap {
@@ -117,6 +129,10 @@ p {
   stroke-width: 1;
 }
 
+.grid-hour {
+  stroke: #d8e0ea;
+}
+
 .series-line {
   fill: none;
   stroke-width: 3;
@@ -139,6 +155,10 @@ p {
   fill: var(--text);
 }
 
+.hour-point {
+  stroke: none;
+}
+
 @media (max-width: 640px) {
   .shell {
     width: min(100vw - 20px, 1040px);
@@ -157,4 +177,3 @@ p {
     min-height: 360px;
   }
 }
-

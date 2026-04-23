@@ -40,6 +40,11 @@ function renderSummary(rows) {
     node.querySelector("span").textContent = Number(row.votes).toLocaleString();
     summary.appendChild(node);
   }
+
+  const gapCard = buildGapCard(rows);
+  if (gapCard) {
+    summary.appendChild(gapCard);
+  }
 }
 
 function renderChart(series) {
@@ -80,6 +85,7 @@ function renderChart(series) {
   };
 
   drawGrid(width, height, margin, plotW, plotH, yMin, yMax);
+  drawHourlyTicks(width, height, margin, minTime, maxTime, x);
 
   series.forEach((item, index) => {
     const color = palette[index % palette.length];
@@ -116,6 +122,56 @@ function drawGrid(width, height, margin, plotW, plotH, yMin, yMax) {
 
   addLine(margin.left, margin.top, margin.left, height - margin.bottom, "axis");
   addLine(margin.left, height - margin.bottom, width - margin.right, height - margin.bottom, "axis");
+}
+
+function drawHourlyTicks(width, height, margin, minTime, maxTime, x) {
+  const hourMs = 60 * 60 * 1000;
+  const ticks = [];
+  const start = Math.ceil(minTime / hourMs) * hourMs;
+
+  for (let current = start; current <= maxTime; current += hourMs) {
+    ticks.push(current);
+  }
+
+  if (!ticks.length) {
+    return;
+  }
+
+  const labelEvery = pickTickLabelStep(ticks, width - margin.left - margin.right);
+  ticks.forEach((tick, index) => {
+    const xPos = x(tick);
+    addLine(xPos, margin.top, xPos, height - margin.bottom, "grid grid-hour");
+    addLine(xPos, height - margin.bottom, xPos, height - margin.bottom + 6, "axis");
+    addCircle(xPos, height - margin.bottom, 2.8, "#9aa8ba", "hour-point");
+    if (index % labelEvery === 0) {
+      addText(xPos, height - 18, formatHour(tick), "label", "middle");
+    }
+  });
+}
+
+function pickTickLabelStep(ticks, plotWidth) {
+  if (ticks.length <= 1) {
+    return 1;
+  }
+  const minSpacing = 54;
+  const rawSpacing = plotWidth / Math.max(1, ticks.length - 1);
+  return rawSpacing >= minSpacing ? 1 : Math.ceil(minSpacing / rawSpacing);
+}
+
+function buildGapCard(rows) {
+  if (rows.length < 2) {
+    return null;
+  }
+
+  const [first, second] = [...rows].sort((a, b) => Number(b.votes) - Number(a.votes));
+  const gap = Math.abs(Number(first.votes) - Number(second.votes));
+  const node = document.createElement("article");
+  node.className = "candidate candidate-gap";
+  node.innerHTML = `<strong></strong><span></span><small></small>`;
+  node.querySelector("strong").textContent = "票数差距";
+  node.querySelector("span").textContent = gap.toLocaleString();
+  node.querySelector("small").textContent = `${first.name} 领先 ${second.name}`;
+  return node;
 }
 
 function addPath(d, color) {
@@ -161,6 +217,14 @@ function formatTime(value) {
   return new Date(value).toLocaleString("zh-CN", { hour12: false });
 }
 
+function formatHour(value) {
+  return new Date(value).toLocaleTimeString("zh-CN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+}
+
 function formatInterval(seconds) {
   const minutes = Math.round(Number(seconds) / 60);
   return minutes >= 1 ? `${minutes}分钟` : `${seconds}秒`;
@@ -170,4 +234,3 @@ window.addEventListener("resize", () => refresh().catch(() => {}));
 refresh().catch(error => {
   statusText.textContent = `加载失败：${error.message}`;
 });
-
