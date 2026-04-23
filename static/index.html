@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vote Tracker</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="toolbar" aria-label="票数监测控制">
+      <div>
+        <h1>Vote Tracker</h1>
+        <p id="statusText">正在加载数据...</p>
+      </div>
+      <button id="checkNow" type="button" title="立即检查票数">↻</button>
+    </section>
+
+    <section class="summary" id="summary"></section>
+
+    <section class="chart-wrap" aria-label="票数变化折线图">
+      <svg id="chart" role="img" aria-label="票数变化折线图"></svg>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+

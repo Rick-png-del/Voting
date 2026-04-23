@@ -1,0 +1,22 @@
+{
+  "host": "127.0.0.1",
+  "port": 8765,
+  "database_path": "data/votes.sqlite3",
+  "poll_interval_seconds": 300,
+  "source": {
+    "type": "hupu_vote_detail",
+    "activity_id": 456,
+    "group_name": "中路",
+    "candidate_names": [
+      "长生",
+      "清融"
+    ],
+    "include_group_name": false,
+    "api_url": "https://bbsactivity.hupu.com/bbsactivityapi/activity/vote/detail",
+    "page_url": "https://activity-static.hupu.com/colorbox-activities/activity-260421-7uynl2a7/index.html?t=1776830935611&night=0",
+    "headers": {
+      "User-Agent": "Mozilla/5.0",
+      "Referer": "https://activity-static.hupu.com/colorbox-activities/activity-260421-7uynl2a7/index.html?t=1776830935611&night=0"
+    }
+  }
+}
