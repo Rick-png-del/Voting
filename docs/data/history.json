@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-23T04:36:14Z",
+  "updated_at": "2026-04-23T04:41:16Z",
   "poll_interval_seconds": 300,
   "tracked_candidates": [
     "长生",
@@ -12,15 +12,15 @@
     "page_url": "https://activity-static.hupu.com/colorbox-activities/activity-260421-7uynl2a7/index.html?t=1776830935611&night=0"
   },
   "latest": {
-    "checked_at": "2026-04-23T04:36:14Z",
+    "checked_at": "2026-04-23T04:41:16Z",
     "rows": [
       {
         "name": "长生",
-        "votes": 91905
+        "votes": 92551
       },
       {
         "name": "清融",
-        "votes": 88487
+        "votes": 89226
       }
     ]
   },
@@ -99,6 +99,10 @@
         {
           "checked_at": "2026-04-23T04:36:14Z",
           "votes": 91905
+        },
+        {
+          "checked_at": "2026-04-23T04:41:16Z",
+          "votes": 92551
         }
       ]
     },
@@ -176,6 +180,10 @@
         {
           "checked_at": "2026-04-23T04:36:14Z",
           "votes": 88487
+        },
+        {
+          "checked_at": "2026-04-23T04:41:16Z",
+          "votes": 89226
         }
       ]
     }
