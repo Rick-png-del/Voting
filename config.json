@@ -15,8 +15,7 @@
     "api_url": "https://bbsactivity.hupu.com/bbsactivityapi/activity/vote/detail",
     "page_url": "https://activity-static.hupu.com/colorbox-activities/activity-260421-7uynl2a7/index.html?t=1776830935611&night=0",
     "headers": {
-      "User-Agent": "Mozilla/5.0",
-      "Referer": "https://activity-static.hupu.com/colorbox-activities/activity-260421-7uynl2a7/index.html?t=1776830935611&night=0"
+      "User-Agent": "Mozilla/5.0"
     }
   }
 }
