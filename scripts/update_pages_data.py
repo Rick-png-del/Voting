@@ -63,10 +63,14 @@ def _append_points(series, rows, checked_at, candidate_names):
     ordered_names = candidate_names or [row["name"] for row in rows]
 
     for row in rows:
+        # 只处理 清融 这条数据
+        if row["name"] != "清融":
+            continue
         item = by_name.setdefault(row["name"], {"name": row["name"], "points": []})
         item["points"].append({"checked_at": checked_at, "votes": int(row["votes"])})
 
-    return [by_name[name] for name in ordered_names if name in by_name]
+    # 最终只返回清融
+    return [by_name[name] for name in ordered_names if name == "清融" and name in by_name]
 
 
 def _candidate_names(config):
