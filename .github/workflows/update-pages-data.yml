@@ -29,6 +29,9 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Validate config
+        run: python -m json.tool config.json > /dev/null
+
       - name: Fetch latest vote data
         run: python scripts/update_pages_data.py
 
