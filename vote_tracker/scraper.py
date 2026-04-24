@@ -96,13 +96,14 @@ def _hupu_vote_detail_votes(source):
     }
     headers.update(source.get("headers", {}))
 
-    try:
-        request = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(request, timeout=20) as response:
-            charset = response.headers.get_content_charset() or "utf-8"
-            payload = json.loads(response.read().decode(charset, errors="replace"))
-    except Exception as exc:
-        raise ScrapeError(f"Failed to fetch Hupu vote detail: {exc}") from exc
+    payload = _fetch_json_with_retries(
+        url,
+        headers=headers,
+        timeout=20,
+        attempts=3,
+        pause_seconds=3,
+        label="Hupu vote detail",
+    )
 
     if not payload.get("succeed") and payload.get("code") not in (0, 1):
         raise ScrapeError(f"Hupu API returned error: {payload.get('msg') or payload}")
@@ -177,6 +178,23 @@ def _with_query(url, values):
     query = dict(urllib.parse.parse_qsl(parsed.query))
     query.update({key: str(value) for key, value in values.items()})
     return urllib.parse.urlunparse(parsed._replace(query=urllib.parse.urlencode(query)))
+
+
+def _fetch_json_with_retries(url, headers=None, timeout=20, attempts=3, pause_seconds=3, label="JSON"):
+    last_exc = None
+    for attempt in range(1, attempts + 1):
+        try:
+            request = urllib.request.Request(url, headers=headers or {})
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                charset = response.headers.get_content_charset() or "utf-8"
+                return json.loads(response.read().decode(charset, errors="replace"))
+        except Exception as exc:
+            last_exc = exc
+            if attempt == attempts:
+                break
+            time.sleep(pause_seconds * attempt)
+
+    raise ScrapeError(f"Failed to fetch {label}: {last_exc}") from last_exc
 
 
 def _clean_text(value):
