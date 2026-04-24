@@ -122,3 +122,9 @@ GitHub Actions 工作流是：
 ```text
 data/votes.sqlite3
 ```
+2. 公开可查数据文件（真实路径）
+对外展示的票数历史数据文件，真实存储路径：
+```text
+docs/data/history.json
+```
+格式：JSON，由脚本从 SQLite 导出，GitHub Actions 每 5 分钟自动更新，更新记录可通过仓库 Commit 历史溯源。
