@@ -1,1 +1,22 @@
-{\n  "host": "127.0.0.1",\n  "port": 8765,\n  "database_path": "data/votes.sqlite3",\n  "poll_interval_seconds": 300,\n  "source": {\n    "type": "hupu_vote_detail",\n    "activity_id": 260421,\n    "group_name": "中路",\n    "candidate_names": [\n      "长生",\n      "清融"\n    ],\n    "include_group_name": false,\n    "api_url": "https://bbsactivity.hupu.com/bbsactivityapi/activity/vote/detail",\n    "page_url": "https://activity-static.hupu.com/colorbox-activities/activity-260421-7uynl2a7/index.html?t=1776830935611&night=0",\n    "headers": {\n      "User-Agent": "Mozilla/5.0"\n    }\n  }\n}
+{
+  "host": "127.0.0.1",
+  "port": 8765,
+  "database_path": "data/votes.sqlite3",
+  "poll_interval_seconds": 300,
+  "source": {
+    "type": "hupu_vote_detail",
+    "activity_id": 456,
+    "group_name": "中路",
+    "candidate_names": [
+      "长生",
+      "清融"
+    ],
+    "include_group_name": false,
+    "api_url": "https://bbsactivity.hupu.com/bbsactivityapi/activity/vote/detail",
+    "page_url": "https://activity-static.hupu.com/colorbox-activities/activity-260421-7uynl2a7/index.html?t=1776830935611&night=0",
+    "headers": {
+      "User-Agent": "Mozilla/5.0",
+      "Referer": "https://activity-static.hupu.com/colorbox-activities/activity-260421-7uynl2a7/index.html?t=1776830935611&night=0"
+    }
+  }
+}
