@@ -58,19 +58,28 @@ def _load_data():
     return json.loads(DATA_PATH.read_text(encoding="utf-8"))
 
 
+# def _append_points(series, rows, checked_at, candidate_names):
+#     by_name = {item.get("name"): item for item in series}
+#     ordered_names = candidate_names or [row["name"] for row in rows]
+
+#     for row in rows:
+#         # 只处理 清融 这条数据
+#         if row["name"] != "清融":
+#             continue
+#         item = by_name.setdefault(row["name"], {"name": row["name"], "points": []})
+#         item["points"].append({"checked_at": checked_at, "votes": int(row["votes"])})
+
+#     # 最终只返回清融
+#     return [by_name[name] for name in ordered_names if name == "清融" and name in by_name]
 def _append_points(series, rows, checked_at, candidate_names):
     by_name = {item.get("name"): item for item in series}
     ordered_names = candidate_names or [row["name"] for row in rows]
 
     for row in rows:
-        # 只处理 清融 这条数据
-        if row["name"] != "清融":
-            continue
         item = by_name.setdefault(row["name"], {"name": row["name"], "points": []})
         item["points"].append({"checked_at": checked_at, "votes": int(row["votes"])})
 
-    # 最终只返回清融
-    return [by_name[name] for name in ordered_names if name == "清融" and name in by_name]
+    return [by_name[name] for name in ordered_names if name in by_name]
 
 
 def _candidate_names(config):
